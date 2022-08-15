@@ -1,0 +1,19 @@
+.btn {
+    border-radius: 0;
+    font-weight: bold;
+
+    &-primary {
+        background-color: $secondary-color;
+
+        $btn-hover-bg: transparentize($secondary-color, 0.2);
+
+        &:hover {
+            background-color: $btn-hover-bg;
+        }
+
+        &:focus{
+            background-color: $btn-hover-bg;
+            border-color: $btn-hover-bg;
+        }
+    }
+}

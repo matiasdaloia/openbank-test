@@ -4,3 +4,10 @@ $terciary-color: #FFF1E5;
 
 $white: #FFFFFF;
 $black: #000000;
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+@import "./theme/_"
+
