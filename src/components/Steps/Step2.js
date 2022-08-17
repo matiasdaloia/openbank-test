@@ -8,6 +8,15 @@ const useStyles = makeStyles(() => ({
   passwordInput: {
     marginRight: "3rem",
   },
+  passwordHintRow: {
+    padding: "2rem 0 1.5rem 0",
+  },
+  formHelperText: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginRight: 0,
+    marginLeft: 0,
+  },
 }));
 
 const Step2 = ({ formik }) => {
@@ -26,13 +35,15 @@ const Step2 = ({ formik }) => {
         <TextField
           id="password"
           name="password"
+          type="password"
           label="Crea tu Contraseña Maestra"
           placeholder="Contraseña"
           variant="outlined"
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          // helperText="Full width!"
+          helperText={formik.errors.password}
+          error={formik.touched.password && formik.errors.password}
           fullWidth
           InputLabelProps={{
             shrink: true,
@@ -43,14 +54,53 @@ const Step2 = ({ formik }) => {
         <TextField
           id="repeatPassword"
           name="repeatPassword"
+          type="password"
           label="Crea tu Contraseña Maestra"
           placeholder="Contraseña"
           variant="outlined"
           value={formik.values.repeatPassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          // helperText="Full width!"
+          helperText={formik.errors.repeatPassword}
+          error={formik.touched.repeatPassword && formik.errors.repeatPassword}
           fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} className={classes.passwordHintRow}>
+        <Typography variant="body1" color="secondary">
+          También puedes crear una pista que te ayude a recordar tu contraseña
+          maestra
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          id="recoverPasswordHint"
+          name="recoverPasswordHint"
+          label="Crea tu pista para recordar tu contraseña (opcional)"
+          placeholder="Introduce tu pista"
+          variant="outlined"
+          value={formik.values.recoverPasswordHint}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          helperText={
+            <>
+              <Typography color="error">
+                {formik.errors.recoverPasswordHint}
+              </Typography>
+              <Typography>
+                {formik.values.recoverPasswordHint.length}/255
+              </Typography>
+            </>
+          }
+          fullWidth
+          FormHelperTextProps={{
+            classes: {
+              root: classes.formHelperText,
+            },
+          }}
           InputLabelProps={{
             shrink: true,
           }}

@@ -44,7 +44,6 @@ const Step1 = ({ formik }) => {
         container
         className={classes.imagesRow}
         justifyContent="space-between"
-        alignItems="center"
       >
         <Grid item xs={12} md={5} className={classes.gridItem}>
           <img src={Img1} alt="Guarda aquí tus contraseñas" />

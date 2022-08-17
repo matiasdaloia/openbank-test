@@ -4,6 +4,9 @@ import WizardHeader from "./WizardHeader";
 import WizardBody from "./WizardBody";
 import WizardFooter from "./WizardFooter";
 import { useFormik } from "formik";
+import * as yup from "yup";
+import YupPassword from "yup-password";
+YupPassword(yup);
 
 const useStyles = makeStyles((theme) => ({
   wizardBody: {
@@ -27,13 +30,72 @@ const initialValues = {
   recoverPasswordHint: "",
 };
 
+const acceptTermsValidationSchema = yup.boolean().required();
+const passwordValidationSchema = yup
+  .string()
+  .password()
+  .required()
+  .min(8)
+  .max(24)
+  .minNumbers(1)
+  .minUppercase(1);
+
+const recoverPasswordHintValidationSchema = yup.string().max(255);
+
+const validate = {
+  0: async (values) => {
+    const errors = {};
+
+    try {
+      await acceptTermsValidationSchema.validate(
+        values.acceptTermsAndConditions
+      );
+    } catch (err) {
+      errors.acceptTermsAndConditions = err.errors;
+    }
+
+    return errors;
+  },
+  1: async (values) => {
+    const errors = {};
+
+    try {
+      await passwordValidationSchema.validate(values.password);
+    } catch (error) {
+      errors.password = error.errors;
+    }
+
+    if (values.password !== values.repeatPassword) {
+      errors.repeatPassword = "Las contraseñas deben coincidir";
+    }
+
+    try {
+      await recoverPasswordHintValidationSchema.validate(
+        values.recoverPasswordHint
+      );
+    } catch (err) {
+      errors.recoverPasswordHint = err.errors;
+    }
+
+    return errors;
+  },
+};
+
 const WizardWrapper = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
+
   const formik = useFormik({
     initialValues,
+    validate: validate[activeStep] && validate[activeStep],
     onSubmit: (values) => {
-      console.log(values);
+      const isLastStep = activeStep === steps.length - 1;
+
+      if (isLastStep) {
+        return;
+      }
+
+      setActiveStep((prevStep) => prevStep + 1);
     },
   });
 
@@ -51,7 +113,6 @@ const WizardWrapper = () => {
             <Grid item xs={12} className={classes.wizardFooter}>
               <WizardFooter
                 formik={formik}
-                steps={steps}
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}
               />

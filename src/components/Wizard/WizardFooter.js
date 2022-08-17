@@ -1,8 +1,7 @@
 import React from "react";
 import { Button, Container, Grid } from "@material-ui/core";
 
-const WizardFooter = ({ steps, activeStep, setActiveStep, formik }) => {
-  const isLastStep = activeStep === steps.length - 1;
+const WizardFooter = ({ activeStep, setActiveStep, formik }) => {
   const isFirstStep = activeStep === 0;
 
   const handleBack = () => {
@@ -11,13 +10,6 @@ const WizardFooter = ({ steps, activeStep, setActiveStep, formik }) => {
     }
 
     setActiveStep((prevStep) => prevStep - 1);
-  };
-
-  const handleNext = () => {
-    if (isLastStep) {
-      return;
-    }
-    setActiveStep((prevStep) => prevStep + 1);
   };
 
   return (
@@ -34,7 +26,6 @@ const WizardFooter = ({ steps, activeStep, setActiveStep, formik }) => {
             color="primary"
             type="submit"
             disabled={!formik.values.acceptTermsAndConditions}
-            onClick={handleNext}
           >
             Siguiente
           </Button>
