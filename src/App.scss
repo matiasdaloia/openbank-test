@@ -1,26 +1,12 @@
 @import "styles/base";
 
 .app {
-  &__top-half {
-    height: 10vh;
-    background-color: #CED4DA;
-  }
-
-  &__bottom-half {
-    height: 90vh;
-    background-color: #E9ECEF;
-  }
-
-  &__content {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-
-    @media (max-width: 600px) {
-      top: 0;
-      left: 0;
-      transform: unset;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1 0 auto;
+    
+    &__header {
+        background-color: $gray-500;
     }
-  }
 }

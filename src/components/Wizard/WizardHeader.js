@@ -4,6 +4,7 @@ import { makeStyles, Step, StepLabel, Stepper } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   stepper: {
     maxWidth: 230,
+    minHeight: theme.dimensions.headerHeight,
     margin: "0 auto",
     backgroundColor: "#abb6c1",
     "& .MuiStepIcon-root": {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 
 const WizardFooter = ({ activeStep, setActiveStep, formik }) => {
   const isFirstStep = activeStep === 0;
@@ -13,14 +13,14 @@ const WizardFooter = ({ activeStep, setActiveStep, formik }) => {
   };
 
   return (
-    <Container maxWidth="md" style={{ paddingTop: 20, paddingBottom: 20 }}>
+    <footer style={{ borderTop: `1px solid #E9ECEF`, padding: 20 }}>
       <Grid container justifyContent="space-between">
         <Grid item>
           <Button variant="text" color="secondary" onClick={handleBack}>
-            Atrás
+            Cancelar
           </Button>
         </Grid>
-        <Grid item justifyContent="flex-end" alignItems="flex-end">
+        <Grid item>
           <Button
             variant="contained"
             color="primary"
@@ -31,7 +31,7 @@ const WizardFooter = ({ activeStep, setActiveStep, formik }) => {
           </Button>
         </Grid>
       </Grid>
-    </Container>
+    </footer>
   );
 };
 

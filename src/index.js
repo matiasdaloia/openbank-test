@@ -5,9 +5,10 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@material-ui/core";
 import { lightTheme } from "config/theme";
+import { cssVariables } from "config/theme/cssVariables";
 
 ReactDOM.render(
-  <ThemeProvider theme={lightTheme}>
+  <ThemeProvider theme={{ ...lightTheme, ...cssVariables }}>
     <App />
   </ThemeProvider>,
   document.getElementById("root")

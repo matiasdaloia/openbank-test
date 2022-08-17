@@ -1,27 +1,41 @@
 import React, { useState } from "react";
-import { Grid, makeStyles, Paper } from "@material-ui/core";
-import WizardHeader from "./WizardHeader";
-import WizardBody from "./WizardBody";
+import { Container, makeStyles, Typography } from "@material-ui/core";
+
 import WizardFooter from "./WizardFooter";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import YupPassword from "yup-password";
+import { submitForm } from "../../services/api";
+import Spinner from "components/Common/Spinner";
+import Step1 from "components/Steps/Step1";
+import Step2 from "components/Steps/Step2";
+import FeedbackStep from "components/Steps/FeedbackStep";
+
 YupPassword(yup);
 
 const useStyles = makeStyles((theme) => ({
-  wizardBody: {
-    backgroundColor: theme.palette.white,
+  wizardWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: `calc(100vh - ${
+      theme.dimensions.headerHeight + theme.dimensions.headerPadding
+    }px)`,
   },
-  wizardFooter: {
-    backgroundColor: theme.palette.white,
-    borderTop: `1px solid #E9ECEF`,
+  wizardBodyContainer: {
+    paddingTop: 25,
+    paddingBottom: 25,
   },
-  wizardHeaderContainer: {
-    backgroundColor: "#abb6c1",
+  stepContentTitle: {
+    "&::after": {
+      content: '""',
+      display: "block",
+      width: 40,
+      height: 2,
+      backgroundColor: "#25CAA2",
+      marginTop: 5,
+    },
   },
 }));
-
-const steps = ["information", "passwordCreation", "feedback"];
 
 const initialValues = {
   acceptTermsAndConditions: false,
@@ -81,18 +95,27 @@ const validate = {
   },
 };
 
-const WizardWrapper = () => {
+const WizardWrapper = ({ activeStep, setActiveStep }) => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [feedbackResult, setFeedbackResult] = useState(null);
 
   const formik = useFormik({
     initialValues,
     validate: validate[activeStep] && validate[activeStep],
-    onSubmit: (values) => {
-      const isLastStep = activeStep === steps.length - 1;
+    onSubmit: async (values) => {
+      const isLastStep = activeStep === 1;
 
       if (isLastStep) {
-        return;
+        setLoading(true);
+        try {
+          const response = await submitForm(values.password);
+          setFeedbackResult(response.status);
+        } catch (error) {
+          setFeedbackResult(error.status);
+        } finally {
+          setLoading(false);
+        }
       }
 
       setActiveStep((prevStep) => prevStep + 1);
@@ -100,27 +123,35 @@ const WizardWrapper = () => {
   });
 
   return (
-    <div className={classes.wizard}>
-      <Paper>
-        <Grid container className={classes.wizardContainer}>
-          <form onSubmit={formik.handleSubmit}>
-            <Grid item xs={12} className={classes.wizardHeaderContainer}>
-              <WizardHeader steps={steps} activeStep={activeStep} />
-            </Grid>
-            <Grid item xs={12} className={classes.wizardBody}>
-              <WizardBody activeStep={activeStep} formik={formik} />
-            </Grid>
-            <Grid item xs={12} className={classes.wizardFooter}>
-              <WizardFooter
-                formik={formik}
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-              />
-            </Grid>
-          </form>
-        </Grid>
-      </Paper>
-    </div>
+    <>
+      <Spinner open={loading} />
+      <Container maxWidth="md">
+        <form onSubmit={formik.handleSubmit}>
+          <div
+            className={classes.wizardWrapper}
+            style={{ justifyContent: activeStep !== 2 ? "space-between" : "" }}
+          >
+            <div className={classes.wizardBodyContainer}>
+              {activeStep !== 2 && (
+                <Typography variant="h5" className={classes.stepContentTitle}>
+                  Crea tu password manager
+                </Typography>
+              )}
+              {activeStep === 0 && <Step1 formik={formik} />}
+              {activeStep === 1 && <Step2 formik={formik} />}
+              {activeStep === 2 && (
+                <FeedbackStep feedbackResult={feedbackResult} />
+              )}
+            </div>
+            <WizardFooter
+              formik={formik}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+            />
+          </div>
+        </form>
+      </Container>
+    </>
   );
 };
 
