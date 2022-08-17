@@ -1,15 +1,26 @@
-import React from "react";
-import { Grid, makeStyles, TextField, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+  Grid,
+  IconButton,
+  InputAdornment,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+import { OutlinedTextField } from "components/theme/forms/OutlinedTextField";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   stepSubtitle: {
     padding: "2rem 0",
   },
   passwordInput: {
-    marginRight: "3rem",
+    [theme.breakpoints.up("md")]: {
+      marginRight: "3rem",
+    },
   },
   passwordHintRow: {
-    padding: "2rem 0 1.5rem 0",
+    padding: "0 0 1.5rem 0",
   },
   formHelperText: {
     display: "flex",
@@ -21,7 +32,19 @@ const useStyles = makeStyles(() => ({
 
 const Step2 = ({ formik }) => {
   const classes = useStyles();
+  const [visible, setVisible] = useState({
+    password: false,
+    repeatPassword: false,
+  });
 
+  const handleToggleVisibility = (type) => {
+    setVisible((prevState) => ({
+      ...prevState,
+      [type]: !prevState[type],
+    }));
+  };
+
+  console.log(visible);
   return (
     <Grid container>
       <Grid item xs={12} className={classes.stepSubtitle}>
@@ -32,32 +55,45 @@ const Step2 = ({ formik }) => {
         </Typography>
       </Grid>
       <Grid item xs={12} md={5} className={classes.passwordInput}>
-        <TextField
+        <OutlinedTextField
           id="password"
           name="password"
-          type="password"
+          type={visible.password ? "text" : "password"}
           label="Crea tu Contraseña Maestra"
           placeholder="Contraseña"
-          variant="outlined"
+          color="secondary"
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           helperText={formik.errors.password}
           error={formik.touched.password && formik.errors.password?.length > 0}
           fullWidth
-          InputLabelProps={{
-            shrink: true,
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => handleToggleVisibility("password")}
+                >
+                  {visible.password ? (
+                    <VisibilityOffIcon />
+                  ) : (
+                    <VisibilityIcon />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
         />
       </Grid>
       <Grid item xs={12} md={5}>
-        <TextField
+        <OutlinedTextField
           id="repeatPassword"
           name="repeatPassword"
-          type="password"
-          label="Crea tu Contraseña Maestra"
+          type={visible.repeatPassword ? "text" : "password"}
+          label="Repite tu Contraseña Maestra"
           placeholder="Contraseña"
-          variant="outlined"
+          color="secondary"
           value={formik.values.repeatPassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -67,8 +103,21 @@ const Step2 = ({ formik }) => {
             formik.errors.repeatPassword?.length > 0
           }
           fullWidth
-          InputLabelProps={{
-            shrink: true,
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle repeat password visibility"
+                  onClick={() => handleToggleVisibility("repeatPassword")}
+                >
+                  {visible.repeatPassword ? (
+                    <VisibilityOffIcon />
+                  ) : (
+                    <VisibilityIcon />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
         />
       </Grid>
@@ -79,13 +128,13 @@ const Step2 = ({ formik }) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <TextField
+        <OutlinedTextField
           id="recoverPasswordHint"
           name="recoverPasswordHint"
           label="Crea tu pista para recordar tu contraseña (opcional)"
           placeholder="Introduce tu pista"
-          variant="outlined"
           value={formik.values.recoverPasswordHint}
+          color="secondary"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           helperText={
@@ -103,9 +152,6 @@ const Step2 = ({ formik }) => {
             classes: {
               root: classes.formHelperText,
             },
-          }}
-          InputLabelProps={{
-            shrink: true,
           }}
         />
       </Grid>

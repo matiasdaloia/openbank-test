@@ -1,3 +1,5 @@
+import { lightPalette } from "./palette";
+
 export const typography = {
   fontFamily: "Quicksand, sans-serif",
   h1: {
@@ -17,5 +19,9 @@ export const typography = {
   },
   subtitle1: {
     fontWeight: "bold",
+  },
+  body1: {
+    fontWeight: 500,
+    color: lightPalette.secondary.main,
   },
 };

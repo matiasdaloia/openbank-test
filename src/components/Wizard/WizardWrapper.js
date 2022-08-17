@@ -6,10 +6,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import YupPassword from "yup-password";
 import { submitForm } from "../../services/api";
-import Spinner from "components/Common/Spinner";
-import Step1 from "components/Steps/Step1";
-import Step2 from "components/Steps/Step2";
-import FeedbackStep from "components/Steps/FeedbackStep";
+import Spinner from "components/common/Spinner";
+import Step1 from "components/steps/Step1";
+import Step2 from "components/steps/Step2";
+import FeedbackStep from "components/steps/FeedbackStep";
 
 YupPassword(yup);
 
@@ -133,7 +133,11 @@ const WizardWrapper = ({ activeStep, setActiveStep }) => {
           >
             <div className={classes.wizardBodyContainer}>
               {activeStep !== 2 && (
-                <Typography variant="h5" className={classes.stepContentTitle}>
+                <Typography
+                  variant="h5"
+                  color="secondary"
+                  className={classes.stepContentTitle}
+                >
                   Crea tu password manager
                 </Typography>
               )}
