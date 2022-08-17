@@ -1,28 +1,22 @@
-@import '~bootstrap/scss/bootstrap.scss';
 @import "styles/base";
 
-.App {
-  &-header{
-    &-logo{
-     max-width: 80px;
-    }
+.app {
+  &__top-half {
+    height: 10vh;
+    // background-color: #abb6c1;
+    // background-color: #abb6c1;
+    background-color: #CED4DA;
   }
-  &-content{
-    padding: 1rem 4rem;
-    h3{
-      color: $primary-color;
-    }
-    p{
-      color: $secondary-color;
-    }
-    .bye-bye{
-      margin: 4rem 0 0;
-      text-align: center;
-      background: $terciary-color;
-      border: 1px solid #ddd;
-      color: #ababab;
-      padding: 1rem;
-      border-radius: 4px;
-    }
+
+  &__bottom-half {
+    height: 90vh;
+    background-color: #E9ECEF;
+  }
+
+  &__content {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
   }
 }
