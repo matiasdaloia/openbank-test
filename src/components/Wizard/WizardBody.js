@@ -16,34 +16,23 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
       width: 40,
       height: 2,
-      backgroundColor: '#25CAA2',
+      backgroundColor: "#25CAA2",
       marginTop: 5,
     },
   },
 }));
 
-function renderStepContent(step) {
-  switch (step) {
-    case 0:
-      return <Step1 />;
-    case 1:
-      return <Step2 />;
-    case 2:
-      return <FeedbackStep />;
-    default:
-      return <div>Not Found</div>;
-  }
-}
-
-const WizardBody = ({ activeStep }) => {
+const WizardBody = ({ activeStep, formik }) => {
   const classes = useStyles();
-
+  console.log(formik);
   return (
     <Container maxWidth="md" className={classes.wizardBodyContainer}>
       <Typography variant="h5" className={classes.stepContentTitle}>
         Crea tu password manager
       </Typography>
-      {renderStepContent(activeStep)}
+      {activeStep === 0 && <Step1 formik={formik} />}
+      {activeStep === 1 && <Step2 formik={formik} />}
+      {activeStep === 2 && <FeedbackStep formik={formik} />}
     </Container>
   );
 };

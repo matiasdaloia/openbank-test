@@ -1,27 +1,41 @@
 import React from "react";
-import { Grid, makeStyles, Typography } from "@material-ui/core";
-import Img1 from '../../assets/img/step1_img1.png'
-import Img2 from '../../assets/img/step1_img2.png'
+import {
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+import Img1 from "../../assets/img/step1_img1.png";
+import Img2 from "../../assets/img/step1_img2.png";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   imagesRow: {
     padding: "40px 30px",
   },
   bottomSpacing: {
-    marginBottom: '2rem',
+    marginBottom: "2rem",
   },
   gridItem: {
-    textAlign: 'center',
-    '& img':{
-      maxWidth: 150
-    }
+    textAlign: "center",
+    [theme.breakpoints.down("md")]: {
+      "&:first-child": {
+        marginBottom: "3rem",
+      },
+    },
+    "& img": {
+      maxWidth: 150,
+    },
   },
   subtitle: {
-    marginBottom: '0.4rem'
-  }
+    marginBottom: "0.4rem",
+  },
+  termsAndConditionsRow: {
+    paddingTop: "3rem",
+  },
 }));
 
-const Step1 = () => {
+const Step1 = ({ formik }) => {
   const classes = useStyles();
 
   return (
@@ -40,7 +54,7 @@ const Step1 = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} md={5} className={classes.gridItem}>
-        <img src={Img2} alt="Guarda aquí tus contraseñas" />
+          <img src={Img2} alt="Guarda aquí tus contraseñas" />
           <Typography variant="body1" color="secondary">
             Crea tu clave maestra: solo tú podrás acceder a tus secretos con
             ella.
@@ -49,7 +63,11 @@ const Step1 = () => {
       </Grid>
       <Grid container>
         <Grid item xs={12} className={classes.bottomSpacing}>
-          <Typography variant="subtitle1" color="secondary" className={classes.subtitle}>
+          <Typography
+            variant="subtitle1"
+            color="secondary"
+            className={classes.subtitle}
+          >
             Cómo funciona
           </Typography>
           <Typography variant="body1">
@@ -59,7 +77,11 @@ const Step1 = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="subtitle1" color="secondary" className={classes.subtitle}>
+          <Typography
+            variant="subtitle1"
+            color="secondary"
+            className={classes.subtitle}
+          >
             Qué datos puedes guardar
           </Typography>
           <Typography variant="body1">
@@ -67,6 +89,24 @@ const Step1 = () => {
             móvil, el número de serie de alguno de tus dispositivos o cualquier
             informacion que necesites tener en un lugar seguro.
           </Typography>
+        </Grid>
+        <Grid item xs={12} className={classes.termsAndConditionsRow}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={formik.values.acceptTermsAndConditions}
+                value={formik.values.acceptTermsAndConditions}
+                onChange={formik.handleChange}
+                name="acceptTermsAndConditions"
+              />
+            }
+            label={
+              <Typography variant="body2">
+                Confirmo que soy mayor de edad y acepto a que traten mis datos
+                personales según la poítica de protección de datos pertinente.
+              </Typography>
+            }
+          />
         </Grid>
       </Grid>
     </>

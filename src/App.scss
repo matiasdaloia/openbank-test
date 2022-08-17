@@ -3,8 +3,6 @@
 .app {
   &__top-half {
     height: 10vh;
-    // background-color: #abb6c1;
-    // background-color: #abb6c1;
     background-color: #CED4DA;
   }
 
@@ -18,5 +16,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
+
+    @media (max-width: 600px) {
+      top: 0;
+      left: 0;
+      transform: unset;
+    }
   }
 }

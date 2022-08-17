@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container, Grid } from "@material-ui/core";
 
-const WizardFooter = ({ steps, activeStep, setActiveStep }) => {
+const WizardFooter = ({ steps, activeStep, setActiveStep, formik }) => {
   const isLastStep = activeStep === steps.length - 1;
   const isFirstStep = activeStep === 0;
 
@@ -29,7 +29,13 @@ const WizardFooter = ({ steps, activeStep, setActiveStep }) => {
           </Button>
         </Grid>
         <Grid item justifyContent="flex-end" alignItems="flex-end">
-          <Button variant="contained" color="primary" onClick={handleNext}>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            disabled={!formik.values.acceptTermsAndConditions}
+            onClick={handleNext}
+          >
             Siguiente
           </Button>
         </Grid>
