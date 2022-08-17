@@ -147,6 +147,7 @@ const WizardWrapper = ({ activeStep, setActiveStep }) => {
               formik={formik}
               activeStep={activeStep}
               setActiveStep={setActiveStep}
+              feedbackResult={feedbackResult}
             />
           </div>
         </form>

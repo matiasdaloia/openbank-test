@@ -43,7 +43,7 @@ const Step2 = ({ formik }) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           helperText={formik.errors.password}
-          error={formik.touched.password && formik.errors.password}
+          error={formik.touched.password && formik.errors.password?.length > 0}
           fullWidth
           InputLabelProps={{
             shrink: true,
@@ -62,7 +62,10 @@ const Step2 = ({ formik }) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           helperText={formik.errors.repeatPassword}
-          error={formik.touched.repeatPassword && formik.errors.repeatPassword}
+          error={
+            formik.touched.repeatPassword &&
+            formik.errors.repeatPassword?.length > 0
+          }
           fullWidth
           InputLabelProps={{
             shrink: true,
@@ -87,10 +90,10 @@ const Step2 = ({ formik }) => {
           onBlur={formik.handleBlur}
           helperText={
             <>
-              <Typography color="error">
+              <Typography variant="caption" color="error">
                 {formik.errors.recoverPasswordHint}
               </Typography>
-              <Typography>
+              <Typography variant="caption">
                 {formik.values.recoverPasswordHint.length}/255
               </Typography>
             </>
