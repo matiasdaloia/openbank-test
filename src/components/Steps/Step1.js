@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import Img1 from "../../assets/img/step1_img1.png";
 import Img2 from "../../assets/img/step1_img2.png";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   imagesRow: {
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Step1 = ({ formik }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -49,15 +51,13 @@ const Step1 = ({ formik }) => {
         <Grid item xs={12} md={5} className={classes.gridItem}>
           <img src={Img1} alt="Guarda aquí tus contraseñas" />
           <Typography variant="body1" color="secondary">
-            Guarda aquí todas tus contraseñas, datos o cualquier información,
-            olvida las notas de papel y las aplicaciones no protegidas.
+            {t("step1.image1.text")}
           </Typography>
         </Grid>
         <Grid item xs={12} md={5} className={classes.gridItem}>
           <img src={Img2} alt="Guarda aquí tus contraseñas" />
           <Typography variant="body1" color="secondary">
-            Crea tu clave maestra: solo tú podrás acceder a tus secretos con
-            ella.
+            {t("step1.image2.text")}
           </Typography>
         </Grid>
       </Grid>
@@ -68,12 +68,10 @@ const Step1 = ({ formik }) => {
             color="secondary"
             className={classes.subtitle}
           >
-            Cómo funciona
+            {t("step1.howItWorks.title")}
           </Typography>
           <Typography variant="body1">
-            En primer lugar, debes crear una contraseña diferente para sus
-            pertenencias electrónicas. No podrás recuperar tu contraseña, asi
-            que recuérdela bien.
+            {t("step1.howItWorks.textContent")}
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -82,12 +80,10 @@ const Step1 = ({ formik }) => {
             color="secondary"
             className={classes.subtitle}
           >
-            Qué datos puedes guardar
+            {t("step1.whatCanYouSave.title")}
           </Typography>
           <Typography variant="body1">
-            Por ejemplo, el número de tu tarjeta, el PIN y el PUK de tu teléfono
-            móvil, el número de serie de alguno de tus dispositivos o cualquier
-            informacion que necesites tener en un lugar seguro.
+            {t("step1.whatCanYouSave.textContent")}
           </Typography>
         </Grid>
         <Grid item xs={12} className={classes.termsAndConditionsRow}>
@@ -102,8 +98,7 @@ const Step1 = ({ formik }) => {
             }
             label={
               <Typography variant="body2">
-                Confirmo que soy mayor de edad y acepto a que traten mis datos
-                personales según la poítica de protección de datos pertinente.
+                {t("step1.acceptTermsLabel")}
               </Typography>
             }
           />

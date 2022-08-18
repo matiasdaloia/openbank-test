@@ -11,6 +11,7 @@ import { OutlinedTextField } from "components/theme/forms/OutlinedTextField";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import InfoIcon from "@material-ui/icons/Info";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   stepSubtitle: {
@@ -47,6 +48,7 @@ const Step2 = ({ formik }) => {
     password: false,
     repeatPassword: false,
   });
+  const { t } = useTranslation();
 
   const handleToggleVisibility = (type) => {
     setVisible((prevState) => ({
@@ -59,9 +61,7 @@ const Step2 = ({ formik }) => {
     <Grid container>
       <Grid item xs={12} className={classes.stepSubtitle}>
         <Typography variant="body1" color="secondary">
-          En primer lugar, debes crear una constraseña diferente para sus
-          pertenencias electrónicas. No podrás recuperar tu constraseá, así que
-          recuérdala bien.
+          {t("step2.title")}
         </Typography>
       </Grid>
       <Grid item xs={12} md={5} className={classes.passwordInput}>
@@ -69,13 +69,13 @@ const Step2 = ({ formik }) => {
           id="password"
           name="password"
           type={visible.password ? "text" : "password"}
-          label="Crea tu Contraseña Maestra"
-          placeholder="Contraseña"
+          label={t("password.label")}
+          placeholder={t("password.placeholder")}
           color="secondary"
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          helperText={formik.errors.password}
+          helperText={t(formik.errors.password)}
           error={formik.touched.password && formik.errors.password?.length > 0}
           fullWidth
           InputProps={{
@@ -101,13 +101,13 @@ const Step2 = ({ formik }) => {
           id="repeatPassword"
           name="repeatPassword"
           type={visible.repeatPassword ? "text" : "password"}
-          label="Repite tu Contraseña Maestra"
-          placeholder="Contraseña"
+          label={t("repeatPassword.label")}
+          placeholder={t("repeatPassword.placeholder")}
           color="secondary"
           value={formik.values.repeatPassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          helperText={formik.errors.repeatPassword}
+          helperText={t(formik.errors.repeatPassword)}
           error={
             formik.touched.repeatPassword &&
             formik.errors.repeatPassword?.length > 0
@@ -155,7 +155,7 @@ const Step2 = ({ formik }) => {
           helperText={
             <>
               <Typography variant="caption" color="error">
-                {formik.errors.recoverPasswordHint}
+                {t(formik.errors.recoverPasswordHint)}
               </Typography>
               <Typography variant="caption">
                 {formik.values.recoverPasswordHint.length}/255

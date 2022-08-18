@@ -6,6 +6,8 @@ import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@material-ui/core";
 import { lightTheme } from "config/theme";
 import { cssVariables } from "config/theme/cssVariables";
+// eslint-disable-next-line no-unused-vars
+import i18n from "config/localization/i18n";
 
 ReactDOM.render(
   <ThemeProvider theme={{ ...lightTheme, ...cssVariables }}>

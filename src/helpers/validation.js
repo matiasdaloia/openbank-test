@@ -6,13 +6,17 @@ const acceptTermsValidationSchema = yup.boolean().required();
 const passwordValidationSchema = yup
   .string()
   .password()
-  .required()
-  .min(8)
-  .max(24)
-  .minNumbers(1)
-  .minUppercase(1);
+  .required("common.errors.required")
+  .minSymbols(0)
+  .minLowercase(0)
+  .min(8, "password.errors.minLength")
+  .max(24, "password.errors.maxLength")
+  .minNumbers(1, "password.errors.minNumbers")
+  .minUppercase(1, "password.errors.uppercase");
 
-const recoverPasswordHintValidationSchema = yup.string().max(255);
+const recoverPasswordHintValidationSchema = yup
+  .string()
+  .max(255, "recoverPasswordHint.errors.maxLength");
 
 export const validateSteps = {
   0: async (values) => {
@@ -38,7 +42,7 @@ export const validateSteps = {
     }
 
     if (values.password !== values.repeatPassword) {
-      errors.repeatPassword = "Las contraseñas deben coincidir";
+      errors.repeatPassword = "repeatPassword.errors.mustMatch";
     }
 
     try {

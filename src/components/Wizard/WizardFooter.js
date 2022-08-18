@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, Grid } from "@material-ui/core";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { useTranslation } from "react-i18next";
 
 const WizardFooter = ({
   activeStep,
@@ -9,6 +10,8 @@ const WizardFooter = ({
   formik,
   feedbackResult,
 }) => {
+  const { t } = useTranslation();
+
   const handleReset = () => {
     setActiveStep(0);
     formik.handleReset();
@@ -29,7 +32,7 @@ const WizardFooter = ({
                 size="large"
                 onClick={handleReset}
               >
-                Cancelar
+                {t("common.cancel")}
               </Button>
             </Grid>
             <Grid item>
@@ -41,7 +44,7 @@ const WizardFooter = ({
                 disabled={!formik.values.acceptTermsAndConditions}
                 endIcon={<ChevronRightIcon />}
               >
-                Siguiente
+                {t("common.next")}
               </Button>
             </Grid>
           </>
@@ -64,7 +67,7 @@ WizardFooter.propTypes = {
   activeStep: PropTypes.number.isRequired,
   setActiveStep: PropTypes.func.isRequired,
   formik: PropTypes.object.isRequired,
-  feedbackResult: PropTypes.number.isRequired,
+  feedbackResult: PropTypes.number,
 };
 
 export default WizardFooter;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/node_modules/@material-ui/styles";
 
@@ -17,6 +18,10 @@ const Spinner = ({ open }) => {
       <CircularProgress color="inherit" />
     </Backdrop>
   );
+};
+
+Spinner.propTypes = {
+  open: PropTypes.bool.isRequired,
 };
 
 export default Spinner;

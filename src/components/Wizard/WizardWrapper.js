@@ -11,6 +11,7 @@ import Spinner from "components/common/Spinner";
 import Step1 from "components/steps/Step1";
 import Step2 from "components/steps/Step2";
 import FeedbackStep from "components/steps/FeedbackStep";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   wizardWrapper: {
@@ -47,6 +48,7 @@ const WizardWrapper = ({ activeStep, setActiveStep }) => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [feedbackResult, setFeedbackResult] = useState(null);
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues,
@@ -86,7 +88,7 @@ const WizardWrapper = ({ activeStep, setActiveStep }) => {
                   color="secondary"
                   className={classes.stepContentTitle}
                 >
-                  Crea tu password manager
+                  {t("translation:content.title")}
                 </Typography>
               )}
               {activeStep === 0 && <Step1 formik={formik} />}
