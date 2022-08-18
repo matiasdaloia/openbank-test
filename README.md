@@ -1,3 +1,5 @@
+### Please use node version v10.16.3 in order for node-sass to work properly
+
 In the project directory, you can run:
 
 ### `npm start`
