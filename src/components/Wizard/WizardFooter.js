@@ -22,7 +22,12 @@ const WizardFooter = ({
         {activeStep !== 2 ? (
           <>
             <Grid item>
-              <Button variant="text" color="secondary" onClick={handleReset}>
+              <Button
+                variant="text"
+                color="secondary"
+                size="large"
+                onClick={handleReset}
+              >
                 Cancelar
               </Button>
             </Grid>
@@ -31,7 +36,9 @@ const WizardFooter = ({
                 variant="contained"
                 color="primary"
                 type="submit"
+                size="large"
                 disabled={!formik.values.acceptTermsAndConditions}
+                endIcon={<ChevronRightIcon />}
               >
                 Siguiente
               </Button>

@@ -21,10 +21,10 @@ const feedbackIcon = {
 const FeedbackStep = ({ feedbackResult }) => {
   return (
     <Grid container alignItems="center">
-      <Grid item xs={1} style={{ textAlign: "center" }}>
+      <Grid item xs={2} md={1} style={{ textAlign: "center" }}>
         {feedbackIcon[feedbackResult]}
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={9} md={10}>
         <Typography
           variant="h6"
           color="secondary"
@@ -33,7 +33,11 @@ const FeedbackStep = ({ feedbackResult }) => {
         >
           {feedbackTitle[feedbackResult]}
         </Typography>
-        <Typography variant="body2" color="secondary">
+        <Typography
+          variant="body2"
+          color="secondary"
+          style={{ fontWeight: 500 }}
+        >
           {feedbackSubtitle[feedbackResult]}
         </Typography>
       </Grid>

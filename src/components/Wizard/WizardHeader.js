@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiStepIcon-root.MuiStepIcon-active": {
       transform: "scale(1.5)",
       color: theme.palette.secondary.main,
+      transition: "all 0.3s",
     },
     "& .MuiStepConnector-line": {
       borderTopWidth: 3,
@@ -44,7 +45,7 @@ const WizardHeader = ({ steps, activeStep }) => {
 
   return (
     <Stepper activeStep={activeStep} className={classes.stepper}>
-      {steps.map((step) => (
+      {steps.map((step, index) => (
         <Step key={step}>
           <StepLabel></StepLabel>
         </Step>

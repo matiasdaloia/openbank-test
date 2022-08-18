@@ -5,7 +5,7 @@ import WizardWrapper from "components/wizard/WizardWrapper";
 import WizardHeader from "components/wizard/WizardHeader";
 
 const App = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   const steps = useMemo(
     () => ["information", "passwordCreation", "feedback"],
     []

@@ -9,10 +9,11 @@ import {
 import { OutlinedTextField } from "components/theme/forms/OutlinedTextField";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import InfoIcon from "@material-ui/icons/Info";
 
 const useStyles = makeStyles((theme) => ({
   stepSubtitle: {
-    padding: "2rem 0",
+    padding: "2rem 0 1rem 0",
   },
   passwordInput: {
     [theme.breakpoints.up("md")]: {
@@ -27,6 +28,15 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginRight: 0,
     marginLeft: 0,
+  },
+  formLabel: {
+    display: "flex",
+    alignItems: "center",
+    fontWeight: 700,
+    "& svg": {
+      marginLeft: "0.5rem",
+      color: theme.palette.info.main,
+    },
   },
 }));
 
@@ -44,7 +54,6 @@ const Step2 = ({ formik }) => {
     }));
   };
 
-  console.log(visible);
   return (
     <Grid container>
       <Grid item xs={12} className={classes.stepSubtitle}>
@@ -131,7 +140,12 @@ const Step2 = ({ formik }) => {
         <OutlinedTextField
           id="recoverPasswordHint"
           name="recoverPasswordHint"
-          label="Crea tu pista para recordar tu contraseña (opcional)"
+          label={
+            <Typography className={classes.formLabel}>
+              Crea tu pista para recordar tu contraseña (opcional)
+              <InfoIcon style={{ cursor: "pointer" }} />
+            </Typography>
+          }
           placeholder="Introduce tu pista"
           value={formik.values.recoverPasswordHint}
           color="secondary"

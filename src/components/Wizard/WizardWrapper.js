@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     "&::after": {
       content: '""',
       display: "block",
-      width: 40,
-      height: 2,
+      width: 50,
+      height: 4,
       backgroundColor: "#25CAA2",
       marginTop: 5,
     },
