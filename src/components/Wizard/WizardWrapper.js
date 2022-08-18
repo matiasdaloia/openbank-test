@@ -7,10 +7,10 @@ import { submitForm } from "../../services/api";
 import { validateSteps } from "helpers/validation";
 
 import WizardFooter from "./WizardFooter";
-import Spinner from "components/common/Spinner";
-import Step1 from "components/steps/Step1";
-import Step2 from "components/steps/Step2";
-import FeedbackStep from "components/steps/FeedbackStep";
+import Spinner from "components/Common/Spinner";
+import Step1 from "components/Steps/Step1";
+import Step2 from "components/Steps/Step2";
+import FeedbackStep from "components/Steps/FeedbackStep";
 import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({

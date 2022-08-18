@@ -23,6 +23,10 @@ i18n
   .init({
     fallbackLng: "es",
     resources,
+    load: "languageOnly",
+    nonExplicitSupportedLngs: false,
+    cleanCode: true,
+    debug: true,
     interpolation: {
       escapeValue: false,
     },

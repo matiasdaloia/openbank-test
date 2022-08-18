@@ -1,9 +1,9 @@
 import React, { Suspense, useMemo, useState } from "react";
 import "./App.scss";
 
-import WizardWrapper from "components/wizard/WizardWrapper";
-import WizardHeader from "components/wizard/WizardHeader";
-import Spinner from "components/common/Spinner";
+import WizardWrapper from "components/Wizard/WizardWrapper";
+import WizardHeader from "components/Wizard/WizardHeader";
+import Spinner from "components/Common/Spinner";
 
 const App = () => {
   const [activeStep, setActiveStep] = useState(0);
