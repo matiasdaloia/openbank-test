@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles, Step, StepLabel, Stepper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +50,8 @@ const useStyles = makeStyles((theme) => ({
       borderRight: "20px solid transparent",
       borderBottom: "20px solid #fff",
       left: "50%",
-      transform: "translateX(-50%) translateY(20px)",
+      transform: "translateX(-50%) translateY(30px)",
+      display: "none",
     },
   },
 }));
@@ -61,15 +63,21 @@ const WizardHeader = ({ steps, activeStep }) => {
     <Stepper activeStep={activeStep} className={classes.stepper}>
       {steps.map((step, index) => (
         <Step key={step}>
-          <StepLabel classes={{ active: classes.active }}></StepLabel>
-          <div
-            className="activeStep__indicator"
-            style={{ display: activeStep === index ? "block" : "none" }}
-          ></div>
+          <StepLabel>
+            <div
+              className="activeStep__indicator"
+              style={{ display: activeStep === index && "block" }}
+            ></div>
+          </StepLabel>
         </Step>
       ))}
     </Stepper>
   );
+};
+
+WizardHeader.propTypes = {
+  steps: PropTypes.array.isRequired,
+  activeStep: PropTypes.number.isRequired,
 };
 
 export default WizardHeader;

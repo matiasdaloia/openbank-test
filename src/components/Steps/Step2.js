@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
   Grid,
   IconButton,
@@ -171,6 +172,10 @@ const Step2 = ({ formik }) => {
       </Grid>
     </Grid>
   );
+};
+
+Step2.propTypes = {
+  formik: PropTypes.object.isRequired,
 };
 
 export default Step2;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Checkbox,
   FormControlLabel,
@@ -110,6 +111,10 @@ const Step1 = ({ formik }) => {
       </Grid>
     </>
   );
+};
+
+Step1.propTypes = {
+  formik: PropTypes.object.isRequired,
 };
 
 export default Step1;

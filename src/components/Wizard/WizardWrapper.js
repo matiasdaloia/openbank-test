@@ -1,17 +1,16 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import { Container, makeStyles, Typography } from "@material-ui/core";
+import { useFormik } from "formik";
+import { submitForm } from "../../services/api";
+import { validateSteps } from "helpers/validation";
 
 import WizardFooter from "./WizardFooter";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import YupPassword from "yup-password";
-import { submitForm } from "../../services/api";
 import Spinner from "components/common/Spinner";
 import Step1 from "components/steps/Step1";
 import Step2 from "components/steps/Step2";
 import FeedbackStep from "components/steps/FeedbackStep";
-
-YupPassword(yup);
 
 const useStyles = makeStyles((theme) => ({
   wizardWrapper: {
@@ -44,57 +43,6 @@ const initialValues = {
   recoverPasswordHint: "",
 };
 
-const acceptTermsValidationSchema = yup.boolean().required();
-const passwordValidationSchema = yup
-  .string()
-  .password()
-  .required()
-  .min(8)
-  .max(24)
-  .minNumbers(1)
-  .minUppercase(1);
-
-const recoverPasswordHintValidationSchema = yup.string().max(255);
-
-const validate = {
-  0: async (values) => {
-    const errors = {};
-
-    try {
-      await acceptTermsValidationSchema.validate(
-        values.acceptTermsAndConditions
-      );
-    } catch (err) {
-      errors.acceptTermsAndConditions = err.errors;
-    }
-
-    return errors;
-  },
-  1: async (values) => {
-    const errors = {};
-
-    try {
-      await passwordValidationSchema.validate(values.password);
-    } catch (error) {
-      errors.password = error.errors;
-    }
-
-    if (values.password !== values.repeatPassword) {
-      errors.repeatPassword = "Las contraseñas deben coincidir";
-    }
-
-    try {
-      await recoverPasswordHintValidationSchema.validate(
-        values.recoverPasswordHint
-      );
-    } catch (err) {
-      errors.recoverPasswordHint = err.errors;
-    }
-
-    return errors;
-  },
-};
-
 const WizardWrapper = ({ activeStep, setActiveStep }) => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
@@ -102,7 +50,7 @@ const WizardWrapper = ({ activeStep, setActiveStep }) => {
 
   const formik = useFormik({
     initialValues,
-    validate: validate[activeStep] && validate[activeStep],
+    validate: validateSteps[activeStep] && validateSteps[activeStep],
     onSubmit: async (values) => {
       const isLastStep = activeStep === 1;
 
@@ -158,6 +106,11 @@ const WizardWrapper = ({ activeStep, setActiveStep }) => {
       </Container>
     </>
   );
+};
+
+WizardWrapper.propTypes = {
+  activeStep: PropTypes.number.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
 };
 
 export default WizardWrapper;

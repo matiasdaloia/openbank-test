@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Grid, Typography } from "@material-ui/core";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
@@ -43,6 +44,10 @@ const FeedbackStep = ({ feedbackResult }) => {
       </Grid>
     </Grid>
   );
+};
+
+FeedbackStep.propTypes = {
+  feedbackResult: PropTypes.number.isRequired,
 };
 
 export default FeedbackStep;

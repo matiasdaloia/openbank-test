@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, Grid } from "@material-ui/core";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -57,6 +58,13 @@ const WizardFooter = ({
       </Grid>
     </footer>
   );
+};
+
+WizardFooter.propTypes = {
+  activeStep: PropTypes.number.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
+  formik: PropTypes.object.isRequired,
+  feedbackResult: PropTypes.number.isRequired,
 };
 
 export default WizardFooter;
