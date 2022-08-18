@@ -35,6 +35,7 @@
         "errors": {
             "minLength": "Debe tener mínimo 8 caracteres",
             "maxLength": "Debe tener máximo 25 caracteres",
+            "minNumbers": "Debe contener al menos 1 numero",
             "uppercase": "Debe contener al menos 1 letra mayúscula"
         }
     },
