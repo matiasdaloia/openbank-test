@@ -1,16 +1,42 @@
-### Please use node version v10.16.3 in order for node-sass to work properly
 
-In the project directory, you can run:
+## Run Locally
 
-### `npm start`
+1. Install Node.js: use version v10.16.3
+2. (opt.) Install v10.16.3 with nvm:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+ nvm install v10.16.3
+ nvm use v10.16.3
+```
+3. Run `npm install`
+4. Run `npm run start`
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Development dependencies
 
-### `npm test`
+- @craco/craco & craco-alias --> to handle aliases
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Frontend dependencies
+
+- @material-ui --> for handling styles
+- formik and yup --> for handling forms and validations respectively
+- i18next --> for handling translations
+
+## Folder structure
+
+- Folder structure is divided into 6 main categories: 
+
+    - *components* --> For all ui related Components
+    - *config* --> for configurations mainly related to theme and localization
+    - *helpers* --> useful functions for handling form validation, etc
+    - *locales* --> all things related to translation files
+    - *services* --> for "api" interactions
+    - *styles* --> base scss
+
+## Unit tests
+
+For unit tests, each component has it's own test file following this convention: 
+
+    `Component.js`
+    `Component.test.js`
+
+In order to be more organized, we will keep test files in the same folder as the component it tests.
